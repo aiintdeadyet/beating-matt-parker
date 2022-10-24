@@ -8,3 +8,11 @@ class Parker_list:
         self.Words = words
         self.Letters = letters
         self.Len = len(words) 
+
+
+def main():
+    pass
+
+
+if __name__ == "__main__":
+    main()
