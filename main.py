@@ -1,9 +1,11 @@
 # trying to find 5 words each containing 5 letters with no letter repeated
-import time
+import time, random, string
+
+from parker_list import parker_list
 
 
-def narrow_list(in_file):
-    """takes a word list file returns a set of only 5 letter words"""
+def Narrow_list(in_file):
+    """takes a word list file returns a set of only 5 letter words, Helper function for make_park_list"""
     with open(in_file, "r") as f:
         all_words = f.readlines()  # reads in word list
         word_dict = {  # makes dict that will be returned
@@ -38,7 +40,7 @@ def narrow_list(in_file):
             strip_word = word.lower().strip("\n")  # gets rid of all extra char
 
             # adds word to set of words
-            if (len(strip_word) != 5) or not check_word(strip_word):
+            if (len(strip_word) != 5) or not Check_word(strip_word):
                 continue
             for char in strip_word:
                 # try:  # if char in word dict
@@ -49,7 +51,7 @@ def narrow_list(in_file):
     return word_dict
 
 
-def check_word(word):
+def Check_word(word):
     """checks that the word only has letters that don't repeat"""
     char_list = [
         "a",
@@ -90,12 +92,23 @@ def check_word(word):
     return True
 
 
+def make_park_list(word_file):    # take word list file as an input
+    """make a parker list of words with all uniq letters"""
+    word_sets = Narrow_list(word_file) # get word sets 
+    re_list = parker_list() # make a parker_list that will be returned
+    for i in range(4):
+        used_letters = re_list.get_letters() # gets used letters
+        while letter in used_letters: # gets a letter that hasn't been used yet
+            letter = random.choice(string.ascii_lowercase)
+        
+        
+
+
 def main():
     """runs program"""
     start_time = time.time()
 
-    narrowed = narrow_list("wordlist_all.txt")
-    print(narrowed)
+    park_list = make_park_list("wordlist_all.txt")
 
     end_time = time.time()
     print("this program took", end_time - start_time, "seconds to run")
