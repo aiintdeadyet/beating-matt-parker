@@ -1,10 +1,6 @@
 # contains the parker_list class
 
 
-from os import remove
-from turtle import update
-
-
 class Parker_list:
     """Parker_list objects alow for more efficient use of data"""
 
@@ -28,8 +24,11 @@ class Parker_list:
 
     def remove(self, word):
         """Removes a word from the object using either the index or the value of the removed word"""
-        if word == str:
+        if isinstance(word, str):
             self.Words.remove(word)
+            self.Letters = self.used_letters()
+        elif isinstance(word, int):
+            self.Words.pop(word)
             self.Letters = self.used_letters()
 
     def __len__(self):
@@ -44,7 +43,7 @@ class Parker_list:
 def main():
     park_list = Parker_list(["james", "david"])
     park_list.add("critc")
-    park_list.remove("james")
+    park_list.remove(1)
     print(park_list)
 
 
