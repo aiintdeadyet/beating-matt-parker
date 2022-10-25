@@ -4,47 +4,47 @@ import time
 
 def narrow_list(in_file):
     """takes a word list file returns a set of only 5 letter words"""
-    f = open(in_file, "r")  # opens file of all english words
-    all_words = f.readlines()  # reads in word list
-    word_dict = {  # makes dict that will be returned
-        "a": set(),
-        "b": set(),
-        "c": set(),
-        "d": set(),
-        "e": set(),
-        "f": set(),
-        "g": set(),
-        "h": set(),
-        "i": set(),
-        "j": set(),
-        "k": set(),
-        "l": set(),
-        "m": set(),
-        "n": set(),
-        "o": set(),
-        "p": set(),
-        "q": set(),
-        "r": set(),
-        "s": set(),
-        "t": set(),
-        "u": set(),
-        "v": set(),
-        "w": set(),
-        "x": set(),
-        "y": set(),
-        "z": set(),
-    }
-    for word in all_words:
-        strip_word = word.lower().strip("\n")  # gets rid of all extra char
+    with open(in_file, "r") as f:
+        all_words = f.readlines()  # reads in word list
+        word_dict = {  # makes dict that will be returned
+            "a": set(),
+            "b": set(),
+            "c": set(),
+            "d": set(),
+            "e": set(),
+            "f": set(),
+            "g": set(),
+            "h": set(),
+            "i": set(),
+            "j": set(),
+            "k": set(),
+            "l": set(),
+            "m": set(),
+            "n": set(),
+            "o": set(),
+            "p": set(),
+            "q": set(),
+            "r": set(),
+            "s": set(),
+            "t": set(),
+            "u": set(),
+            "v": set(),
+            "w": set(),
+            "x": set(),
+            "y": set(),
+            "z": set(),
+        }
+        for word in all_words:
+            strip_word = word.lower().strip("\n")  # gets rid of all extra char
 
-        # adds word to set of words
-        if (len(strip_word) != 5) or not check_word(strip_word):
-            continue
-        for char in strip_word:
-            # try:  # if char in word dict
-            word_dict[char].add(strip_word)
-            # except:  # else forget about it
-            #     break
+            # adds word to set of words
+            if (len(strip_word) != 5) or not check_word(strip_word):
+                continue
+            for char in strip_word:
+                # try:  # if char in word dict
+                word_dict[char].add(strip_word)
+                # except:  # else forget about it
+                #     break
 
     return word_dict
 
