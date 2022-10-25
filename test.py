@@ -1,4 +1,4 @@
-# a file to test code
+# a file to test code before adding it to the project 
 
 
 def main():
