@@ -1,13 +1,17 @@
 # contains the parker_list class
 
 
-class Parker_list:
+class parker_list:
     """Parker_list objects alow for more efficient use of data"""
 
     def __init__(self, words=[]):
         """Initializes Parker_list objects"""
         self.Words = words
         self.Letters = self.used_letters()
+
+    def get_letters(self):
+        '''returns used Letters'''
+        return self.Letters
 
     def used_letters(self):
         """returns a set of letters that have been used in the words"""
@@ -43,7 +47,6 @@ class Parker_list:
 def main():
     park_list = Parker_list(["james", "david"])
     park_list.add("critc")
-    park_list.remove(1)
     print(park_list)
 
 
