@@ -13,6 +13,10 @@ class parker_list:
         '''returns used Letters'''
         return self.Letters
 
+    def get_words(self):
+        '''returns Words'''
+        return self.Words
+
     def used_letters(self):
         """returns a set of letters that have been used in the words"""
         re_set = set()
