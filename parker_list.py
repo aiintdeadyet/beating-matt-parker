@@ -7,7 +7,7 @@ class parker_list:
     def __init__(self, words=[]):
         """Initializes Parker_list objects"""
         self.Words = words
-        self.Letters = self.used_letters()
+        self.Letters = self.Used_letters()
 
     def get_letters(self):
         '''returns used Letters'''
@@ -17,7 +17,7 @@ class parker_list:
         '''returns Words'''
         return self.Words
 
-    def used_letters(self):
+    def Used_letters(self):
         """returns a set of letters that have been used in the words"""
         re_set = set()
         for word in self.Words:
@@ -28,7 +28,7 @@ class parker_list:
     def add(self, word):
         """Add word to the object"""
         self.Words.append(word)
-        self.Letters = self.used_letters()
+        self.Letters = self.Used_letters()
 
     def remove(self, word):
         """Removes a word from the object using either the index or the value of the removed word"""
@@ -49,7 +49,7 @@ class parker_list:
 
 
 def main():
-    park_list = Parker_list(["james", "david"])
+    park_list = parker_list(["james", "david"])
     park_list.add("critc")
     print(park_list)
 

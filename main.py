@@ -82,9 +82,12 @@ def Check_word(word):
         "z",
     ]
     used = []  # used char
+    voul_count = 0
     for char in word:
+        if char in "aeiou":
+            voul_count += 1
         if (
-            char not in char_list or char in used
+            (char not in char_list) or (char in used) or (voul_count > 1)
         ):  # if char is a letter we haven't used yet
             return False
         used.append(char)
@@ -92,23 +95,39 @@ def Check_word(word):
     return True
 
 
-def make_park_list(word_file):    # take word list file as an input
+def make_park_list(word_file):  # take word list file as an input
     """make a parker list of words with all uniq letters"""
-    word_sets = Narrow_list(word_file) # get word sets 
-    re_list = parker_list() # make a parker_list that will be returned
-    for i in range(5):
-        used_letters = re_list.get_letters() # gets used letters
-        letter = random.choice(string.ascii_lowercase)
-        while letter in used_letters: # gets a letter that hasn't been used yet
-            letter = random.choice(string.ascii_lowercase)
-        word = random.choice(word_sets[letter])
-        while not (word in re_list.get_words()):
-            word_letters = [word]
-        
-        re_list.add(word)
+    word_sets = Narrow_list(word_file)  # get word sets
+    re_list = parker_list()  # make a parker_list that will be returned
+    while len(re_list) != 5:  # while there are not 5 words in the parker list
+        used_letters = re_list.get_letters() # get the letters that we have already used
+        remove_used(word_sets, used_letters) # remove those letters from the word list 
+        keys = list(word_sets.keys()) # get the letters
+        letter = random.choice(keys)  # choose a letter
+        letter = word_sets[letter] # get the words associated with that letter 
+        word = random.choice(letter) # choose a word
+        letter.remove(word) # remove(word) 
+        while word not in re_list.get_words():
+            i = 0
+            while i != len(used_letters):
+                char = list(used_letters)[i]
+                if char in word:
+                    word = random.choice(letter) # choose a word
+                    letter.remove(word) # remove(word)
+                    i -= 1
+                i += 1
+            re_list.add(word) # add the word to the re_list 
 
     return re_list
 
+
+def remove_used(word_sets, used_letters):
+    """removes used letters from the keys of the word sets"""
+    for letter in used_letters:
+        try:
+            word_sets.pop(letter)
+        except:
+            pass
 
 def main():
     """runs program"""
