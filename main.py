@@ -104,17 +104,31 @@ def make_park_list(word_file):  # take word list file as an input
         remove_used(word_sets, used_letters) # remove those letters from the word list 
         keys = list(word_sets.keys()) # get the letters
         letter = random.choice(keys)  # choose a letter
-        letter = word_sets[letter] # get the words associated with that letter 
-        word = random.choice(letter) # choose a word
-        letter.remove(word) # remove(word) 
+        letter_words = word_sets[letter] # get the words associated with that letter 
+        word = random.choice(letter_words) # choose a word
+        word_sets.pop(letter)
+        letter_words.remove(word) # remove(word) 
         while word not in re_list.get_words():
             i = 0
             while i != len(used_letters):
                 char = list(used_letters)[i]
                 if char in word:
-                    word = random.choice(letter) # choose a word
-                    letter.remove(word) # remove(word)
-                    i -= 1
+                    # word = random.choice(letter_words) # choose a word
+                    # letter_words.remove(word) # remove(word)
+                    try:
+                        word = random.choice(letter_words) # choose a word
+                        letter_words.remove(word) # remove(word)
+                    except:
+                        try:
+                            word_sets.pop(letter) # remove letter from word list 
+                        except:
+                            pass
+                        keys = list(word_sets.keys())
+                        letter = random.choice(keys)  # choose a letter
+                        letter_words = word_sets[letter] # get the words associated with that letter 
+                        word = random.choice(letter_words) # choose a word
+                        letter_words.remove(word) # remove(word)
+                    i = 0
                 i += 1
             re_list.add(word) # add the word to the re_list 
 
